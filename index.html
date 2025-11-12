@@ -9,15 +9,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#111827; margin:0; background:#fff;}
+    /* Page sections */
+    .page-section {
+      display: none;
+    }
+    .page-section.active {
+      display: block;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      color:#111827; 
+      margin:0; 
+      background:#fff;
+      overflow-y: scroll;
+    }
+    
     h1,h2 {font-family: "Source Serif 4", serif;}
     h3 {font-family: "Source Serif 4", serif; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #1e293b;}
+    h4 {font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.8rem; color: #1e293b; font-weight: 600;}
     .container {max-width: 1000px; margin: auto; padding: 20px;}
     section {margin: 40px 0;}
-
-    /* Page sections */
-    .page-section {display: none;}
-    .page-section.active {display: block;}
 
     /* Abstract (dark, full width) */
     .abstract-section {width: 100%; background: linear-gradient(145deg,#1e293b,#334155); color:#f1f5f9; padding:40px 0;}
@@ -231,6 +247,14 @@
         </div>
       </div>
     </section>
+    
+    <!-- Speakers on Home Page -->
+    <div class="container">
+      <section style="margin-top: 60px;">
+        <h2>Invited Speakers</h2>
+        <div class="people-grid" id="speakerGridHome"></div>
+      </section>
+    </div>
   </div>
 
   <main>
@@ -395,8 +419,65 @@
     <div id="schedule" class="page-section">
       <div class="container">
         <section>
-          <h2>Schedule</h2>
-          <p>Schedule details will be announced soon.</p>
+          <h2>Workshop Schedule</h2>
+          <p><strong>Date:</strong> April 28, 2025 (Morning Session)</p>
+          <p><strong>Location:</strong> Dubai, UAE</p>
+          
+          <div class="guidelines-box">
+            <h3>Tentative Schedule</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="background: #f1f5f9;">
+                  <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Time</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Activity</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Speaker/Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">9:00 - 9:15</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Opening Remarks</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Workshop Organizers</td>
+                </tr>
+                <tr style="background: #f9fafb;">
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">9:15 - 10:00</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Keynote Talk 1</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Prof. Ranjay Krishna</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">10:00 - 10:30</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Contributed Talks (Session 1)</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Selected Papers</td>
+                </tr>
+                <tr style="background: #f9fafb;">
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">10:30 - 11:00</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Coffee Break & Poster Session</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">-</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">11:00 - 11:45</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Keynote Talk 2</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Shivani Poddar</td>
+                </tr>
+                <tr style="background: #f9fafb;">
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">11:45 - 12:15</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Contributed Talks (Session 2)</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Selected Papers</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">12:15 - 12:30</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Panel Discussion</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">All Invited Speakers</td>
+                </tr>
+                <tr style="background: #f9fafb;">
+                  <td style="padding: 12px;">12:30 - 12:45</td>
+                  <td style="padding: 12px;">Closing Remarks</td>
+                  <td style="padding: 12px;">Workshop Organizers</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top: 20px;"><em>* Schedule is tentative and subject to change</em></p>
+          </div>
         </section>
       </div>
     </div>
@@ -430,9 +511,6 @@
     if (targetPage) {
       targetPage.classList.add('active');
     }
-    
-    // Smooth scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   navLinks.forEach(link => {
@@ -511,32 +589,43 @@
   }
 
   const grid = document.getElementById('speakerGrid');
-  grid.innerHTML = '';
+  const gridHome = document.getElementById('speakerGridHome');
+  
+  if (grid) grid.innerHTML = '';
+  if (gridHome) gridHome.innerHTML = '';
 
   SPEAKERS.forEach(p => {
-    const a = document.createElement('a');
-    a.href = /^(https?:)?\/{2}/i.test(p.link) ? p.link : `https://${p.link || ''}`;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.className = 'person-card';
-    a.setAttribute('aria-label', `${p.name} — ${p.role||''}`);
+    // Create speaker card
+    const createCard = () => {
+      const a = document.createElement('a');
+      a.href = /^(https?:)?\/{2}/i.test(p.link) ? p.link : `https://${p.link || ''}`;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.className = 'person-card';
+      a.setAttribute('aria-label', `${p.name} — ${p.role||''}`);
 
-    const img = document.createElement('img');
-    img.className = 'avatar';
-    img.alt = p.name;
-    img.loading = 'lazy';
+      const img = document.createElement('img');
+      img.className = 'avatar';
+      img.alt = p.name;
+      img.loading = 'lazy';
 
-    loadSpeakerImage(img, p.img);
+      loadSpeakerImage(img, p.img);
 
-    const name = document.createElement('h4'); name.textContent = p.name;
-    const role = document.createElement('div'); role.className = 'role'; role.textContent = p.role || '';
-    const bio = document.createElement('div'); bio.className = 'bio'; bio.textContent = p.bio || '';
+      const name = document.createElement('h4'); name.textContent = p.name;
+      const role = document.createElement('div'); role.className = 'role'; role.textContent = p.role || '';
+      const bio = document.createElement('div'); bio.className = 'bio'; bio.textContent = p.bio || '';
 
-    a.appendChild(img);
-    a.appendChild(name);
-    a.appendChild(role);
-    a.appendChild(bio);
-    grid.appendChild(a);
+      a.appendChild(img);
+      a.appendChild(name);
+      a.appendChild(role);
+      a.appendChild(bio);
+      
+      return a;
+    };
+    
+    // Add to both grids
+    if (grid) grid.appendChild(createCard());
+    if (gridHome) gridHome.appendChild(createCard());
   });
   </script>
 </body>
