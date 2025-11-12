@@ -26,14 +26,19 @@
     .hero h3{font-weight:500; margin-top:0; font-size:1.6rem; text-shadow:0 2px 6px rgba(0,0,0,.4)}
 
     /* Speakers */
-    .people-grid{display:grid; gap:16px}
+    .people-grid{display:grid; gap:18px}
     @media(min-width:720px){.people-grid{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:1024px){.people-grid{grid-template-columns:repeat(3,1fr)}}
-    .person-card{display:flex; gap:14px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 2px 6px rgba(0,0,0,.05)}
-    .avatar{width:84px; height:84px; flex:0 0 84px; border-radius:10px; object-fit:cover; background:#e5e7eb; border:1px solid #e5e7eb}
-    .person-card h4{margin:0 0 4px; font-size:18px}
+
+    /* Make entire card clickable */
+    .person-card{display:flex; flex-direction:column; align-items:center; gap:12px; background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:18px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,.05); transition:transform .12s ease, box-shadow .12s ease}
+    .person-card:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .person-card:focus-visible{outline:3px solid #2563eb; outline-offset:2px}
+
+    .avatar{width:160px; height:160px; border-radius:12px; object-fit:cover; background:#e5e7eb; border:1px solid #e5e7eb}
+    .person-card h4{margin:0 0 2px; font-size:18px}
     .role{color:#6b7280; font-size:.95rem; margin-bottom:6px}
-    .bio{color:#374151; font-size:.95rem; line-height:1.45}
+    .bio{color:#374151; font-size:.95rem; line-height:1.5}
 
     footer{text-align:center; padding:20px; border-top:1px solid #e2e8f0; color:#6b7280}
   </style>
@@ -73,20 +78,23 @@
       {
         name: "Prof. Ranjay Krishna",
         role: "University of Washington — RAIVN Lab Co-Director",
-        img: "./assets/speakers/ranjay-krishna.jpeg",
+        img: "./assets/speakers/ranjay-krishna.jpg",
         bio: "Assistant Professor and co-director of the RAIVN Lab. His research bridges vision, language, and human-AI interaction, creating systems that see and communicate like people.",
+        link: "https://ranjaykrishna.com/index.html" // add GitHub or homepage URL here
       },
       {
         name: "Shivani Poddar",
         role: "Google DeepMind — Jules GenAI Engineering Lead",
-        img: "./assets/speakers/Shivani-Poddar.jpeg",
+        img: "./assets/speakers/shivani-poddar.jpg",
         bio: "Engineering Lead addressing coordination across user-facing agents and safety systems at scale. Previously built multi-agent conversational AI at Meta.",
+        link: "https://www.linkedin.com/in/shivani-poddar/"
       },
       {
         name: "Prof. Hanan Salam",
         role: "NYU Abu Dhabi — SMART Lab Director",
-        img: "./assets/speakers/Hanan-Salam.jpeg",
+        img: "./assets/speakers/hanan-salam.jpg",
         bio: "Assistant Professor and SMART Lab Director investigating coordination, trust, and explainability in multi-agent systems. Co-founder of Women in AI and UNESCO AI Ethics Expert.",
+        link: "http://www.hanansalam.com/"
       }
     ];
 
@@ -94,26 +102,29 @@
     const grid = document.getElementById('speakerGrid');
     grid.innerHTML = '';
     SPEAKERS.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'person-card';
+      // Wrap entire card in a clickable link
+      const a = document.createElement('a');
+      a.href = p.link || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'person-card';
+      a.setAttribute('aria-label', p.name + ' — ' + (p.role || ''));
 
       const img = document.createElement('img');
       img.className = 'avatar';
       img.alt = p.name;
       img.src = p.img;
 
-      const body = document.createElement('div');
       const name = document.createElement('h4'); name.textContent = p.name;
-      const role = document.createElement('div'); role.className = 'role'; role.textContent = p.role;
-      const bio = document.createElement('div'); bio.className = 'bio'; bio.textContent = p.bio;
+      const role = document.createElement('div'); role.className = 'role'; role.textContent = p.role || '';
+      const bio = document.createElement('div'); bio.className = 'bio'; bio.textContent = p.bio || '';
 
-      body.appendChild(name);
-      body.appendChild(role);
-      body.appendChild(bio);
+      a.appendChild(img);
+      a.appendChild(name);
+      a.appendChild(role);
+      a.appendChild(bio);
 
-      card.appendChild(img);
-      card.appendChild(body);
-      grid.appendChild(card);
+      grid.appendChild(a);
     });
   </script>
 </body>
