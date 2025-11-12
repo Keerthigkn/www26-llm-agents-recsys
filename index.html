@@ -34,33 +34,42 @@
 
     /* Top Navigation */
     .top-nav {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 10;
+      z-index: 1000;
       display: flex;
       gap: 24px;
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 24px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
     }
     .nav-link {
       color: #fff;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,.3);
+      font-size: 0.95rem;
       transition: opacity 0.2s ease;
       cursor: pointer;
+      white-space: nowrap;
     }
     .nav-link:hover {
-      opacity: 0.8;
+      opacity: 0.7;
     }
     @media(max-width: 768px) {
       .top-nav {
-        position: relative;
-        top: 0;
-        right: 0;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        left: 10px;
         justify-content: center;
-        margin-bottom: 20px;
+        gap: 12px;
         flex-wrap: wrap;
+        padding: 10px 16px;
+      }
+      .nav-link {
+        font-size: 0.85rem;
       }
     }
 
@@ -91,6 +100,13 @@
     .cfp-content ul {margin: 1rem 0; padding-left: 2rem;}
     .cfp-content li {margin: 0.5rem 0;}
     .cfp-content strong {color: #1e293b;}
+    .cfp-content code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
     .submission-link {
       display: inline-block;
       background: #2563eb;
@@ -103,17 +119,61 @@
       transition: background 0.2s ease;
     }
     .submission-link:hover {background: #1d4ed8;}
+    .highlight-box {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 20px;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+    .highlight-box h3 {margin-top: 0; color: #92400e;}
+    .highlight-box p {margin-bottom: 0.8rem;}
     .important-dates {
-      background: #f8fafc;
+      background: #f0f9ff;
       border-left: 4px solid #2563eb;
       padding: 20px;
       margin: 2rem 0;
       border-radius: 8px;
     }
-    .important-dates h3 {margin-top: 0;}
+    .important-dates h3 {margin-top: 0; color: #1e40af;}
     .important-dates ul {list-style: none; padding-left: 0;}
-    .important-dates li {padding: 8px 0; border-bottom: 1px solid #e2e8f0;}
+    .important-dates li {padding: 10px 0; border-bottom: 1px solid #dbeafe;}
     .important-dates li:last-child {border-bottom: none;}
+    .important-dates .date-label {font-weight: 600; color: #1e40af;}
+    .important-dates .date-value {color: #374151; margin-left: 8px;}
+    .guidelines-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+    .guidelines-box h3 {margin-top: 0; color: #1e293b;}
+    .guidelines-box ul {margin: 1rem 0;}
+    .fast-track {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      padding: 24px;
+      margin: 2rem 0;
+      border-radius: 12px;
+    }
+    .fast-track h3 {
+      margin-top: 0; 
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fast-track h3::before {
+      content: '✴️';
+      font-size: 1.2em;
+    }
+    .section-divider {
+      border: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+      margin: 3rem 0;
+    }
 
     /* Speakers */
     .people-grid{display:grid; gap:18px}
@@ -179,23 +239,95 @@
       <div class="container">
         <h2>Call for Papers</h2>
         <div class="cfp-content">
+          
+          <div class="highlight-box">
+            <h3>Fast Track Guidelines for Authors ✴️ NEW!!</h3>
+            <p>We welcome fast-track submissions from WWW 2026 main conference! If your paper received positive reviews but was not accepted, you can submit it to our workshop with expedited review.</p>
+          </div>
+
           <p>Large Language Models (LLMs) have recently emerged as transformative tools in artificial intelligence, revolutionizing various domains. In recommendation systems, LLMs have demonstrated remarkable potential to drive innovation and enhance user experiences. Recommendation data typically includes multi-modal information, such as product titles, images, user-item interactions, and customer reviews. The richness and diversity of this data create unique opportunities for designing and applying advanced LLM models.</p>
           
           <p>LLMs have already been applied to a range of recommendation tasks, including personalized content recommendation, conversational search, product classification, question answering, and contextual advertising. They have also been integrated into real-world production systems. Despite these successes, the adoption of LLMs in recommendation systems is still in its early stages. Significant challenges remain, such as ensuring the accuracy of LLM-generated content, improving efficiency, mitigating biases, and safeguarding user privacy and data security.</p>
           
           <p>This workshop seeks to explore a wide range of topics related to the use of LLMs and agents in recommendation systems, encompassing methods, datasets, applications, and systems. We invite submissions that address these challenges and contribute to advancing the state-of-the-art in LLMs for recommendations.</p>
           
-          <a href="https://openreview.net/forum?id=rRxlrflrZgbl" class="submission-link" target="_blank" rel="noopener noreferrer">Submit Your Paper</a>
-          
-          <p><strong>Submission Guidelines:</strong></p>
-          <p>Submissions of papers must be in English, in PDF format, in the current ACM two-column conference format. Suitable LaTeX, Word, and Overleaf templates are available from the <a href="https://www.acm.org/publications/proceedings-template" target="_blank">ACM Website</a> (use the "sigconf" proceedings template for LaTeX and the Interim Template for Word). The recommended setting for LaTeX is: <code>\documentclass[sigconf, anonymous, review]{acmart}</code>.</p>
+          <div class="important-dates">
+            <h3>Important Dates (AOE)</h3>
+            <ul>
+              <li><span class="date-label">Workshop paper submission:</span><span class="date-value">January 26, 2025</span></li>
+              <li><span class="date-label">Workshop paper notification:</span><span class="date-value">February 28, 2025</span></li>
+              <li><span class="date-label">Workshop paper camera-ready:</span><span class="date-value">March 7, 2025</span></li>
+              <li><span class="date-label">Workshop date:</span><span class="date-value">April 28, 2025 (Morning Session) 🎉</span></li>
+            </ul>
+          </div>
+
+          <div class="guidelines-box">
+            <h3>Submission Guidelines</h3>
+            <p>We mainly follow the WWW guidelines for paper submission except for a single-blind peer review. All important guidelines are as follows:</p>
+            <ul>
+              <li><strong>Single-blind peer review.</strong> There is no requirement for anonymous submission unless authors prefer.</li>
+              <li><strong>Page limits:</strong> Full papers cannot exceed 8 pages, including an appendix, plus unlimited references (paper content is limited to 8 pages, which means that if you have an appendix, then it should be included within that page limit. It is also ok if you do not have an appendix and instead 8 pages of content). Short papers cannot exceed 4 pages plus unlimited references.</li>
+              <li><strong>Formatting Requirements.</strong> Submissions must be in English, in double-column format, and must adhere to the ACM template and format (also available in <a href="https://www.overleaf.com/" target="_blank">Overleaf</a>). Word users may use the Word Interim Template and the recommended setting for LaTeX is: <code>\documentclass[sigconf, review]{acmart}</code>.</li>
+              <li><strong>Prior Publication:</strong> Workshop papers that have been previously published or are under review for another journal, conference or workshop should not be considered for publication.</li>
+              <li><strong>Submission Format:</strong> Papers should be submitted in PDF format, electronically, using the submission system.</li>
+            </ul>
+            
+            <a href="https://openreview.net/" class="submission-link" target="_blank" rel="noopener noreferrer">Submit Your Paper via OpenReview</a>
+            
+            <p><strong>Contact:</strong> For questions, please email: <a href="mailto:workshop@example.com">workshop@example.com</a></p>
+          </div>
+
+          <hr class="section-divider" />
+
+          <div class="fast-track">
+            <h3>Fast Track Guidelines for Authors</h3>
+            
+            <h4>Appendix Requirements:</h4>
+            <p>Include an Appendix in your submission with:</p>
+            <ul>
+              <li>Reviews from the main review process (copy and paste them).</li>
+              <li>A section titled <strong>"Improvements"</strong> where you describe:
+                <ul>
+                  <li>(1) Any issues from the reviews you addressed and how.</li>
+                  <li>(2) Note: Only light revisions are expected. Heavy changes are not allowed. If your work is already in good shape, no revisions are necessary.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <h4>Review Integrity:</h4>
+            <p>Modifying or tweaking the content of review comments is <strong>strictly prohibited</strong>.</p>
+
+            <h4>Privacy Commitment:</h4>
+            <p>Reviews submitted in the Appendix will remain private and will only be accessible to workshop organizers. They will not be shared with third parties under any circumstances.</p>
+
+            <h4>Conflict of Interest (COI):</h4>
+            <ul>
+              <li>If there is a conflict of interest (e.g., submissions from colleagues, co-organizers, or co-authors), inform us immediately.</li>
+              <li>Authors with COI will be directed to submit elsewhere.</li>
+            </ul>
+
+            <h4>Publication in ACM Companion Proceedings:</h4>
+            <ul>
+              <li>By default, accepted papers will be published in the ACM Companion proceedings.</li>
+              <li>If you wish to opt-out of publication, notify us upon acceptance.</li>
+            </ul>
+
+            <h4>Important Notes:</h4>
+            <p>Failure to follow these guidelines may result in penalties or rejection of your submission. Ensure that your submission adheres to these requirements to expedite the review process.</p>
+          </div>
+
+          <hr class="section-divider" />
+
+          <h3>Submission Tracks</h3>
+          <p>We emphasize that the topics list is not exhaustive and welcome submissions in any related areas. Besides regular research papers, though no need to specify your track during submission, we also welcome other tracks, including:</p>
           
           <ul>
-            <li><strong>Long paper:</strong> Submission of original work up to eight pages in length (unlimited references and appendix).</li>
-            <li><strong>Short paper:</strong> Submission of work in progress with preliminary results, and position papers, up to four pages in length (unlimited references and appendix).</li>
+            <li><strong>Demo Track,</strong> which discusses the designing details about LLM and agentic recommendation systems.</li>
+            <li><strong>Applied/Industry Track,</strong> which investigates applied challenges in agents for recommendation systems.</li>
+            <li><strong>Dataset/Benchmark Track,</strong> which introduces new datasets and benchmarks regarding agents for recommendation systems.</li>
           </ul>
 
-          <h3>Topics</h3>
+          <h3>Topics of Interest</h3>
           
           <h4>Foundations</h4>
           <ul>
@@ -204,37 +336,45 @@
             <li>Alignment Tuning for Recommendation Systems</li>
             <li>Agent Systems for Recommendations</li>
             <li>Multi-Agent Coordination and Negotiation</li>
+            <li>Reasoning and Planning for Recommendations</li>
           </ul>
 
-          <h4>Application</h4>
+          <h4>Applications</h4>
           <ul>
-            <li>Product Search and Recommendation</li>
-            <li>Product Information Generation, including Review Summary</li>
-            <li>Product Question Answering</li>
-            <li>Personalized Recommendation</li>
+            <li>Content Discovery and Personalized Recommendation</li>
+            <li>Conversational Recommendation Systems</li>
+            <li>Product Search and Information Retrieval</li>
+            <li>Review Generation and Summarization</li>
+            <li>Question Answering for E-commerce</li>
             <li>Advertising and Sponsored Content</li>
-            <li>Business Analytics</li>
-            <li>Recommendation datasets</li>
             <li>Customer Behavior Analysis</li>
-            <li>Fairness and bias in Recommendations</li>
-            <li>Benchmarks and Evaluation for Recommendation tasks</li>
+            <li>Cross-domain and Cold-start Recommendations</li>
           </ul>
 
-          <h4>System</h4>
+          <h4>Evaluation & Ethics</h4>
+          <ul>
+            <li>Benchmarks and Evaluation Metrics</li>
+            <li>Fairness and Bias in Recommendations</li>
+            <li>Privacy and Security</li>
+            <li>Transparency and Explainability</li>
+            <li>User Trust and Satisfaction</li>
+          </ul>
+
+          <h4>Systems & Deployment</h4>
           <ul>
             <li>Scalable and Distributed Training</li>
             <li>Model Serving and Deployment</li>
-            <li>Machine Learning Systems for Recommendation LLMs</li>
             <li>Retrieval-Augmented Generation for Recommendations</li>
+            <li>Real-time Recommendation Systems</li>
+            <li>Production Machine Learning Systems</li>
           </ul>
 
-          <div class="important-dates">
-            <h3>Important Dates</h3>
+          <div class="guidelines-box">
+            <h3>Publication Policy</h3>
             <ul>
-              <li><strong>Submission Deadline:</strong> January 26, 2025</li>
-              <li><strong>Notification:</strong> February 28, 2025</li>
-              <li><strong>Camera-ready:</strong> March 03, 2025</li>
-              <li><strong>Workshop:</strong> April 28 or 29, 2025</li>
+              <li>Papers accepted by the workshop can be included in the Companion Proceedings of The Web Conference 2026, subject to meeting the camera-ready timeline.</li>
+              <li>Each accepted paper needs to have at least one full workshop registration.</li>
+              <li>At least one author for each accepted paper must be present during the talk to take questions from the audience during the live Q&A.</li>
             </ul>
           </div>
         </div>
@@ -291,7 +431,7 @@
       targetPage.classList.add('active');
     }
     
-    // Scroll to top
+    // Smooth scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -309,8 +449,18 @@
   // Handle initial page load with hash
   window.addEventListener('load', () => {
     const hash = window.location.hash.substring(1);
-    if (hash) {
+    if (hash && hash !== '') {
       showPage(hash);
+    }
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && hash !== '') {
+      showPage(hash);
+    } else {
+      showPage('home');
     }
   });
 
