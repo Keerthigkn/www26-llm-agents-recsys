@@ -14,8 +14,10 @@
     .container {max-width: 1000px; margin: auto; padding: 20px;}
     section {margin: 40px 0;}
 
-    /* Abstract (dark) */
-    .abstract-card {background: linear-gradient(145deg,#1e293b,#334155); color:#f1f5f9; padding:25px; border-radius:12px; border:1px solid #475569; box-shadow:0 4px 12px rgba(0,0,0,.2);}
+    /* Abstract (dark, full width) */
+    .abstract-section {width: 100%; background: linear-gradient(145deg,#1e293b,#334155); color:#f1f5f9; padding:40px 0;}
+    .abstract-container {max-width: 1000px; margin: auto; padding: 0 20px;}
+    .abstract-card {color:#f1f5f9; border-radius:12px;}
     .abstract-card p {line-height:1.6; color:#e2e8f0;}
 
     /* Hero with faint Dubai image */
@@ -30,7 +32,6 @@
     @media(min-width:720px){.people-grid{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:1024px){.people-grid{grid-template-columns:repeat(3,1fr)}}
 
-    /* Clickable speaker cards (no underline) */
     a.person-card,
     a.person-card:link,
     a.person-card:visited,
@@ -63,16 +64,19 @@
     </div>
   </header>
 
-  <main class="container">
-    <section id="abstract">
-      <h2 style="color:#1e293b;">Abstract</h2>
+  <!-- Abstract full-width section -->
+  <section class="abstract-section">
+    <div class="abstract-container">
+      <h2>Abstract</h2>
       <div class="abstract-card">
         <p>Recommendation systems underpin much of the web economy—from content feeds and e-commerce to advertising and social interaction. As Large Language Models (LLMs) and autonomous agents increasingly power these systems, we are witnessing a shift from centralized recommendation pipelines to agentic ecosystems that plan, negotiate, and interact across product discovery, personalization, and fulfillment.</p>
         <p>LLMs introduce new capabilities for reasoning over multi-modal data, grounding recommendations in natural language, and enabling conversational, zero-shot personalization. Meanwhile, multi-agent systems unlock emergent coordination across buyers, sellers, and platforms—yet raise challenges of interpretability, robustness, and evaluation. Traditional short-term metrics like clicks and conversions fail to capture coordination quality, long-horizon trust, or fairness across stakeholders.</p>
         <p>This workshop convenes the communities of recommendation systems, multi-agent learning, information retrieval, and mechanism design to define principles for transparent, scalable, and responsible agent-driven personalization. We invite work on architectures for LLM-integrated recommendation, agent collaboration, retrieval-augmented generation, reasoning and alignment, evaluation frameworks, fairness and trust, and real-world deployment case studies. By bridging academic insights with industry deployments, this forum seeks to shape the next generation of LLM and agent-based recommendation systems—systems that are adaptive, explainable, and aligned with user and societal welfare.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
+  <main class="container">
     <!-- Speakers Section -->
     <section id="speakers">
       <h2>Invited Speakers</h2>
@@ -109,15 +113,33 @@
       }
     ];
 
-    // Ensure absolute URL if someone forgets https://
-    const ensureAbsolute = (url) => /^(https?:)?\/\//i.test(url) ? url : `https://${url}`;
+    function loadSpeakerImage(imgEl, basePathOrFull) {
+      const hasExt = /\.[a-z]{3,4}$/i.test(basePathOrFull);
+      const base = hasExt ? basePathOrFull.replace(/\.[^.]+$/, '') : basePathOrFull;
+      const exts = ['.jpg','.jpeg','.png','.JPG','.JPEG','.PNG'];
+      const candidates = hasExt
+        ? [basePathOrFull, ...exts.filter(e => !basePathOrFull.endsWith(e)).map(e => base + e)]
+        : exts.map(e => base + e);
+
+      let i = 0;
+      const tryNext = () => {
+        if (i >= candidates.length) {
+          imgEl.removeAttribute('srcset');
+          imgEl.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="12" fill="%239ca3af">No image</text></svg>';
+          return;
+        }
+        imgEl.src = candidates[i++];
+        imgEl.onerror = tryNext;
+      };
+      tryNext();
+    }
 
     const grid = document.getElementById('speakerGrid');
     grid.innerHTML = '';
 
     SPEAKERS.forEach(p => {
       const a = document.createElement('a');
-      a.href = p.link ? ensureAbsolute(p.link) : '#';
+      a.href = /^(https?:)?\/{2}/i.test(p.link) ? p.link : `https://${p.link || ''}`;
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.className = 'person-card';
@@ -127,11 +149,8 @@
       img.className = 'avatar';
       img.alt = p.name;
       img.loading = 'lazy';
-      img.src = p.img;
-      img.onerror = () => {
-        img.removeAttribute('srcset');
-        img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="12" fill="%239ca3af">No image</text></svg>';
-      };
+
+      loadSpeakerImage(img, p.img);
 
       const name = document.createElement('h4'); name.textContent = p.name;
       const role = document.createElement('div'); role.className = 'role'; role.textContent = p.role || '';
