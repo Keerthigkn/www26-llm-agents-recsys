@@ -30,12 +30,19 @@
       margin: 40px 0;
     }
 
+    /* Dark abstract section styling */
     .abstract-card {
-      background: #f9fafb;
-      padding: 20px;
+      background: linear-gradient(145deg, #1e293b, #334155); /* elegant dark blue-grey gradient */
+      color: #f1f5f9; /* light text for contrast */
+      padding: 25px;
       border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #475569;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .abstract-card p {
+      line-height: 1.6;
+      color: #e2e8f0;
     }
 
     /* Hero header with faint Dubai background image */
@@ -53,7 +60,6 @@
       overflow: hidden;
     }
 
-    /* Faint overlay */
     .hero::before {
       content: '';
       position: absolute;
@@ -72,7 +78,7 @@
     }
 
     .hero h1 {
-      font-size: 3.2rem; /* increased title size */
+      font-size: 3.2rem;
       margin-bottom: 15px;
       text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
     }
@@ -80,7 +86,7 @@
     .hero h3 {
       font-weight: 500;
       margin-top: 0;
-      font-size: 1.6rem; /* increased subtitle size */
+      font-size: 1.6rem;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
 
@@ -95,14 +101,14 @@
 <body>
   <header class="hero">
     <div class="container">
-      <h1>Workshop on LLM & Agents for Recommendation Systems</h1>
+      <h1>LLM & Agents for Recommendation Systems</h1>
       <h3>The Web Conference 2026 (WWW’26) • Dubai, UAE</h3>
     </div>
   </header>
 
   <main class="container">
     <section id="abstract">
-      <h2>Abstract</h2>
+      <h2 style="color:#1e293b;">Abstract</h2>
       <div class="abstract-card">
         <p>
           Recommendation systems underpin much of the web economy—from content feeds and e-commerce to advertising and social interaction. As Large Language Models (LLMs) and autonomous agents increasingly power these systems, we are witnessing a shift from centralized recommendation pipelines to agentic ecosystems that plan, negotiate, and interact across product discovery, personalization, and fulfillment.
