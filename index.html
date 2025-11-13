@@ -9,8 +9,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#111827; margin:0; background:#fff;}
+    /* Page sections */
+    .page-section {
+      display: none;
+    }
+    .page-section.active {
+      display: block;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      color:#111827; 
+      margin:0; 
+      background:#fff;
+      overflow-y: scroll;
+    }
+    
     h1,h2 {font-family: "Source Serif 4", serif;}
+    h3 {font-family: "Source Serif 4", serif; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #1e293b;}
+    h4 {font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.8rem; color: #1e293b; font-weight: 600;}
     .container {max-width: 1000px; margin: auto; padding: 20px;}
     section {margin: 40px 0;}
 
@@ -26,6 +47,149 @@
     .hero .container{position:relative; z-index:1}
     .hero h1{font-size:3.2rem; margin-bottom:15px; text-shadow:0 3px 8px rgba(0,0,0,.5)}
     .hero h3{font-weight:500; margin-top:0; font-size:1.6rem; text-shadow:0 2px 6px rgba(0,0,0,.4)}
+
+    /* Top Navigation */
+    .top-nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 24px;
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 24px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      opacity: 0.7;
+    }
+    @media(max-width: 768px) {
+      .top-nav {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 10px 16px;
+      }
+      .nav-link {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Tabs */
+    .tabs-container {width: 100%; background: #f8fafc; border-bottom: 2px solid #e2e8f0;}
+    .tabs {max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; gap: 0; padding: 0 20px;}
+    .tab-button {
+      background: none;
+      border: none;
+      padding: 16px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab-button:hover {color: #334155; background: #f1f5f9;}
+    .tab-button.active {color: #1e293b; border-bottom-color: #2563eb;}
+    
+    .tab-content {display: none; padding: 40px 0;}
+    .tab-content.active {display: block;}
+
+    /* Call for Papers styling */
+    .cfp-content {line-height: 1.8; color: #374151;}
+    .cfp-content p {margin-bottom: 1.2rem;}
+    .cfp-content ul {margin: 1rem 0; padding-left: 2rem;}
+    .cfp-content li {margin: 0.5rem 0;}
+    .cfp-content strong {color: #1e293b;}
+    .cfp-content code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    .submission-link {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 1.5rem 0;
+      transition: background 0.2s ease;
+    }
+    .submission-link:hover {background: #1d4ed8;}
+    .highlight-box {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 20px;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+    .highlight-box h3 {margin-top: 0; color: #92400e;}
+    .highlight-box p {margin-bottom: 0.8rem;}
+    .important-dates {
+      background: #f0f9ff;
+      border-left: 4px solid #2563eb;
+      padding: 20px;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+    .important-dates h3 {margin-top: 0; color: #1e40af;}
+    .important-dates ul {list-style: none; padding-left: 0;}
+    .important-dates li {padding: 10px 0; border-bottom: 1px solid #dbeafe;}
+    .important-dates li:last-child {border-bottom: none;}
+    .important-dates .date-label {font-weight: 600; color: #1e40af;}
+    .important-dates .date-value {color: #374151; margin-left: 8px;}
+    .guidelines-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+    .guidelines-box h3 {margin-top: 0; color: #1e293b;}
+    .guidelines-box ul {margin: 1rem 0;}
+    .fast-track {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      padding: 24px;
+      margin: 2rem 0;
+      border-radius: 12px;
+    }
+    .fast-track h3 {
+      margin-top: 0; 
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fast-track h3::before {
+      content: '✴️';
+      font-size: 1.2em;
+    }
+    .section-divider {
+      border: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+      margin: 3rem 0;
+    }
 
     /* Speakers */
     .people-grid{display:grid; gap:18px}
@@ -58,30 +222,298 @@
 </head>
 <body>
   <header class="hero">
+    <nav class="top-nav">
+      <a href="#home" class="nav-link" data-page="home">Home</a>
+      <a href="#call-for-papers" class="nav-link" data-page="call-for-papers">Call for Papers</a>
+      <a href="#schedule" class="nav-link" data-page="schedule">Schedule</a>
+      <a href="#speakers" class="nav-link" data-page="speakers">Invited Speakers</a>
+      <a href="#organizers" class="nav-link" data-page="organizers">Organizing Committee</a>
+    </nav>
     <div class="container">
       <h1>LLM & Agents for Recommendation Systems</h1>
-      <h3>The Web Conference 2026 (WWW’26) • Dubai, UAE</h3>
+      <h3>The Web Conference 2026 (WWW'26) • Dubai, UAE</h3>
     </div>
   </header>
 
-  <!-- Abstract full-width section -->
-  <section class="abstract-section">
-    <div class="abstract-container">
-      <h2>Abstract</h2>
-      <div class="abstract-card">
-        <p>Recommendation systems underpin much of the web economy—from content feeds and e-commerce to advertising and social interaction. As Large Language Models (LLMs) and autonomous agents increasingly power these systems, we are witnessing a shift from centralized recommendation pipelines to agentic ecosystems that plan, negotiate, and interact across product discovery, personalization, and fulfillment.</p>
-        <p>LLMs introduce new capabilities for reasoning over multi-modal data, grounding recommendations in natural language, and enabling conversational, zero-shot personalization. Meanwhile, multi-agent systems unlock emergent coordination across buyers, sellers, and platforms—yet raise challenges of interpretability, robustness, and evaluation. Traditional short-term metrics like clicks and conversions fail to capture coordination quality, long-horizon trust, or fairness across stakeholders.</p>
-        <p>This workshop convenes the communities of recommendation systems, multi-agent learning, information retrieval, and mechanism design to define principles for transparent, scalable, and responsible agent-driven personalization. We invite work on architectures for LLM-integrated recommendation, agent collaboration, retrieval-augmented generation, reasoning and alignment, evaluation frameworks, fairness and trust, and real-world deployment case studies. By bridging academic insights with industry deployments, this forum seeks to shape the next generation of LLM and agent-based recommendation systems—systems that are adaptive, explainable, and aligned with user and societal welfare.</p>
+  <!-- Home Page (Abstract) -->
+  <div id="home" class="page-section active">
+    <section class="abstract-section">
+      <div class="abstract-container">
+        <h2>Abstract</h2>
+        <div class="abstract-card">
+          <p>Recommendation systems underpin much of the web economy—from content feeds and e-commerce to advertising and social interaction. As Large Language Models (LLMs) and autonomous agents increasingly power these systems, we are witnessing a shift from centralized recommendation pipelines to agentic ecosystems that plan, negotiate, and interact across product discovery, personalization, and fulfillment.</p>
+          <p>LLMs introduce new capabilities for reasoning over multi-modal data, grounding recommendations in natural language, and enabling conversational, zero-shot personalization. Meanwhile, multi-agent systems unlock emergent coordination across buyers, sellers, and platforms—yet raise challenges of interpretability, robustness, and evaluation. Traditional short-term metrics like clicks and conversions fail to capture coordination quality, long-horizon trust, or fairness across stakeholders.</p>
+          <p>This workshop convenes the communities of recommendation systems, multi-agent learning, information retrieval, and mechanism design to define principles for transparent, scalable, and responsible agent-driven personalization. We invite work on architectures for LLM-integrated recommendation, agent collaboration, retrieval-augmented generation, reasoning and alignment, evaluation frameworks, fairness and trust, and real-world deployment case studies. By bridging academic insights with industry deployments, this forum seeks to shape the next generation of LLM and agent-based recommendation systems—systems that are adaptive, explainable, and aligned with user and societal welfare.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Speakers on Home Page -->
+    <div class="container">
+      <section style="margin-top: 60px;">
+        <h2>Invited Speakers</h2>
+        <div class="people-grid" id="speakerGridHome"></div>
+      </section>
+    </div>
+  </div>
+
+  <main>
+    <!-- Call for Papers Page -->
+    <div id="call-for-papers" class="page-section">
+      <div class="container">
+        <h2>Call for Papers</h2>
+        <div class="cfp-content">
+          
+          <div class="highlight-box">
+            <h3>Fast Track Guidelines for Authors ✴️ NEW!!</h3>
+            <p>We welcome fast-track submissions from WWW 2026 main conference! If your paper received positive reviews but was not accepted, you can submit it to our workshop with expedited review.</p>
+          </div>
+
+          <p>Large Language Models (LLMs) have recently emerged as transformative tools in artificial intelligence, revolutionizing various domains. In recommendation systems, LLMs have demonstrated remarkable potential to drive innovation and enhance user experiences. Recommendation data typically includes multi-modal information, such as product titles, images, user-item interactions, and customer reviews. The richness and diversity of this data create unique opportunities for designing and applying advanced LLM models.</p>
+          
+          <p>LLMs have already been applied to a range of recommendation tasks, including personalized content recommendation, conversational search, product classification, question answering, and contextual advertising. They have also been integrated into real-world production systems. Despite these successes, the adoption of LLMs in recommendation systems is still in its early stages. Significant challenges remain, such as ensuring the accuracy of LLM-generated content, improving efficiency, mitigating biases, and safeguarding user privacy and data security.</p>
+          
+          <p>This workshop seeks to explore a wide range of topics related to the use of LLMs and agents in recommendation systems, encompassing methods, datasets, applications, and systems. We invite submissions that address these challenges and contribute to advancing the state-of-the-art in LLMs for recommendations.</p>
+          
+          <div class="important-dates">
+            <h3>Important Dates (AOE)</h3>
+            <ul>
+              <li><span class="date-label">Workshop paper submission:</span><span class="date-value">December 18, 2025</span></li>
+              <li><span class="date-label">Workshop paper notification:</span><span class="date-value">January 13, 2026</span></li>
+              <li><span class="date-label">Workshop paper camera-ready:</span><span class="date-value"> February 2, 2026</span></li>
+              <li><span class="date-label">Workshop date:</span><span class="date-value">April 13 or 14, 2026-Tentatively (All day) 🎉</span></li>
+            </ul>
+          </div>
+
+          <div class="guidelines-box">
+            <h3>Submission Guidelines</h3>
+            <p>We mainly follow the WWW guidelines for paper submission except for a single-blind peer review. All important guidelines are as follows:</p>
+            <ul>
+              <li><strong>Single-blind peer review.</strong> There is no requirement for anonymous submission unless authors prefer.</li>
+              <li><strong>Page limits:</strong> Full papers cannot exceed 8 pages, including an appendix, plus unlimited references (paper content is limited to 8 pages, which means that if you have an appendix, then it should be included within that page limit. It is also ok if you do not have an appendix and instead 8 pages of content). Short papers cannot exceed 4 pages plus unlimited references.</li>
+              <li><strong>Formatting Requirements.</strong> Submissions must be in English, in double-column format, and must adhere to the ACM template and format (also available in <a href="https://www.overleaf.com/" target="_blank">Overleaf</a>). Word users may use the Word Interim Template and the recommended setting for LaTeX is: <code>\documentclass[sigconf, review]{acmart}</code>.</li>
+              <li><strong>Prior Publication:</strong> Workshop papers that have been previously published or are under review for another journal, conference or workshop should not be considered for publication.</li>
+              <li><strong>Submission Format:</strong> Papers should be submitted in PDF format, electronically, using the submission system.</li>
+            </ul>
+            
+            <a href="https://openreview.net/" class="submission-link" target="_blank" rel="noopener noreferrer">Submit Your Paper via OpenReview</a>
+            
+            <p><strong>Contact:</strong> For questions, please email: <a href="mailto:wwwlars2026@gmail.com">workshop@example.com</a></p>
+          </div>
+
+          <hr class="section-divider" />
+
+          <div class="fast-track">
+            <h3>Fast Track Guidelines for Authors</h3>
+            
+            <h4>Appendix Requirements:</h4>
+            <p>Include an Appendix in your submission with:</p>
+            <ul>
+              <li>Reviews from the main review process (copy and paste them).</li>
+              <li>A section titled <strong>"Improvements"</strong> where you describe:
+                <ul>
+                  <li>(1) Any issues from the reviews you addressed and how.</li>
+                  <li>(2) Note: Only light revisions are expected. Heavy changes are not allowed. If your work is already in good shape, no revisions are necessary.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <h4>Review Integrity:</h4>
+            <p>Modifying or tweaking the content of review comments is <strong>strictly prohibited</strong>.</p>
+
+            <h4>Privacy Commitment:</h4>
+            <p>Reviews submitted in the Appendix will remain private and will only be accessible to workshop organizers. They will not be shared with third parties under any circumstances.</p>
+
+            <h4>Conflict of Interest (COI):</h4>
+            <ul>
+              <li>If there is a conflict of interest (e.g., submissions from colleagues, co-organizers, or co-authors), inform us immediately.</li>
+              <li>Authors with COI will be directed to submit elsewhere.</li>
+            </ul>
+
+            <h4>Publication in ACM Companion Proceedings:</h4>
+            <ul>
+              <li>By default, accepted papers will be published in the ACM Companion proceedings.</li>
+              <li>If you wish to opt-out of publication, notify us upon acceptance.</li>
+            </ul>
+
+            <h4>Important Notes:</h4>
+            <p>Failure to follow these guidelines may result in penalties or rejection of your submission. Ensure that your submission adheres to these requirements to expedite the review process.</p>
+          </div>
+
+          <hr class="section-divider" />
+
+          <h3>Submission Tracks</h3>
+          <p>We emphasize that the topics list is not exhaustive and welcome submissions in any related areas. Besides regular research papers, though no need to specify your track during submission, we also welcome other tracks, including:</p>
+          
+          <ul>
+            <li><strong>Demo Track,</strong> which discusses the designing details about LLM and agentic recommendation systems.</li>
+            <li><strong>Applied/Industry Track,</strong> which investigates applied challenges in agents for recommendation systems.</li>
+            <li><strong>Dataset/Benchmark Track,</strong> which introduces new datasets and benchmarks regarding agents for recommendation systems.</li>
+          </ul>
+
+          <h3>Topics of Interest</h3>
+          
+          <h4>Agent Architectures & Foundation Models </h4>
+          <ul>
+            <li>Architectures for LLM-integrated recommendation (fine-tuning, adapters, distillation)</li>
+            <li>LLM agents for search, recommendation, and conversational negotiation</li>
+            <li>Tool-using assistants, memory-augmented agents, and long-horizon planning</li>
+            <li>Retrieval-Augmented Generation (RAG) and knowledge grounding for recommendations</li>
+            <li>Multi-modal recommendation using LLMs (text, image, video, audio)</li>
+          </ul>
+
+          <h4>Multi-Agent Coordination & Learning</h4>
+          <ul>
+            <li>Multi-agent reinforcement learning for recommendation ecosystems</li>
+            <li>Mechanism design, incentive alignment, and strategic interactions</li>
+            <li>Credit assignment and coordination quality among agents</li>
+            <li>Agentic interaction loops between users, content, and LLMs</li>
+            <li>Multi-agent collaboration and reasoning in recommendation environments</li>
+          </ul>
+
+          <h4>Personalization, Alignment & Optimization</h4>
+          <ul>
+            <li>Reinforcement learning for personalization and long-term value</li>
+            <li>Alignment of LLMs with user intent and preference modeling</li>
+            <li>Human-in-the-loop learning and adaptive feedback systems</li>
+            <li>Latency, memory, and serving optimization for scalable deployment</li>
+          </ul>
+
+          <h4>Trust, Safety & Responsible Systems</h4>
+          <ul>
+            <li>Fairness, bias mitigation, and explainability in recommendations</li>
+            <li>Fraud and collusion prevention, regulatory compliance, and ethical governance</li>
+            <li>Privacy-preserving recommendation systems and responsible deployment</li>
+          </ul>
+          
+          <h4>Evaluation, Benchmarks & Deployment</h4>
+          <ul>
+            <li>Evaluation frameworks: offline metrics, causal testing, and A/B experiments</li>
+            <li>Coordination and market simulation benchmarks</li>
+            <li>Off-policy evaluation and long-horizon value estimation</li>
+            <li>Open datasets, reproducible pipelines, and industry case studies</li>
+            <li>Orchestration frameworks, constrained RL/bandits, and system-level scalability</li>
+             
+          
+
+          <div class="guidelines-box">
+            <h3>Publication Policy</h3>
+            <ul>
+              <li>Papers accepted by the workshop can be included in the Companion Proceedings of The Web Conference 2026, subject to meeting the camera-ready timeline.</li>
+              <li>Each accepted paper needs to have at least one full workshop registration.</li>
+              <li>At least one author for each accepted paper must be present during the talk to take questions from the audience during the live Q&A.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <main class="container">
-    <!-- Speakers Section -->
-    <section id="speakers">
-      <h2>Invited Speakers</h2>
-      <div class="people-grid" id="speakerGrid"></div>
+    <!-- Speakers Page -->
+    <div id="speakers" class="page-section">
+      <div class="container">
+        <section>
+          <h2>Invited Speakers</h2>
+          <div class="people-grid" id="speakerGrid"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Schedule Page -->
+<div id="schedule" class="page-section">
+  <div class="container">
+    <section>
+      <h2>Workshop Schedule</h2>
+      <p><strong>Date:</strong> April 13 or 14, 2025 -Tentative (Full-Day Workshop)</p>
+      <p><strong>Location:</strong> Dubai, UAE</p>
+      
+      <div class="guidelines-box">
+        <h3>Full-Day Interactive Schedule</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #f1f5f9;">
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Time</th>
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Activity</th>
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Speaker/Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">09:00 – 09:15</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Opening Remarks</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Workshop Organizers</td>
+            </tr>
+            <tr style="background: #f9fafb;">
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">09:15 – 10:00</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Opening Keynote (30 min talk + 15 min Q&A)</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">TBD</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">10:00 – 10:45</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Keynote Talk 2 (30 min talk + 15 min Q&A)</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">TBD</td>
+            </tr>
+            <tr style="background: #f9fafb;">
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">10:45 – 11:15</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Coffee Break</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Networking & Refreshments</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">11:15 – 12:15</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Oral Presentations 1–2 (2×30 min slots)</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Selected Papers</td>
+            </tr>
+            <tr style="background: #f9fafb;">
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">12:15 – 13:30</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Lunch & Poster Session</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Informal Discussions</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">13:30 – 14:15</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Keynote Talk 3 (30 min talk + 15 min Q&A)</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">TBD</td>
+            </tr>
+            <tr style="background: #f9fafb;">
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">14:15 – 15:15</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Oral Presentations 3–4 (2×30 min slots)</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Selected Papers</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">15:15 – 15:45</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Coffee Break</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Networking & Refreshments</td>
+            </tr>
+            <tr style="background: #f9fafb;">
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">15:45 – 16:30</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Keynote Talk 4 (30 min talk + 15 min Q&A)</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">TBD</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">16:30 – 17:15</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Panel: Building Trustworthy Agent Marketplaces</td>
+              <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Trust, evaluation, governance, deployment challenges</td>
+            </tr>
+            <tr style="background: #f9fafb;">
+              <td style="padding: 12px;">17:15 – 17:30</td>
+              <td style="padding: 12px;">Closing, Awards, and Community Next Steps</td>
+              <td style="padding: 12px;">Workshop Organizers</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 20px;"><em>* Schedule is tentative and subject to change</em></p>
+      </div>
     </section>
+  </div>
+</div>
+
+    <!-- Organizers Page -->
+    <div id="organizers" class="page-section">
+      <div class="container">
+        <section>
+          <h2>Organizing Committee</h2>
+          <p>Organizers information will be added soon.</p>
+        </section>
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -89,56 +521,105 @@
   </footer>
 
   <script>
+  // Page navigation functionality
+  const navLinks = document.querySelectorAll('.nav-link');
+  const pageSections = document.querySelectorAll('.page-section');
+
+  function showPage(pageId) {
+    // Hide all pages
+    pageSections.forEach(section => section.classList.remove('active'));
+    
+    // Show selected page
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+      targetPage.classList.add('active');
+    }
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const pageId = link.getAttribute('data-page');
+      showPage(pageId);
+      
+      // Update URL hash without jumping
+      history.pushState(null, null, `#${pageId}`);
+    });
+  });
+
+  // Handle initial page load with hash
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && hash !== '') {
+      showPage(hash);
+    }
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && hash !== '') {
+      showPage(hash);
+    } else {
+      showPage('home');
+    }
+  });
+
+  // Speaker functionality
   const SPEAKERS = [
     {
       name: "Prof. Ranjay Krishna",
       role: "University of Washington — RAIVN Lab Co-Director",
-      img: "./assets/speakers/ranjay-krishna.jpeg",   // exact file name
+      img: "./assets/speakers/ranjay-krishna.jpeg",
       bio: "Assistant Professor and co-director of the RAIVN Lab. His research bridges vision, language, and human-AI interaction, creating systems that see and communicate like people.",
       link: "https://ranjaykrishna.com/index.html"
     },
     {
       name: "Shivani Poddar",
       role: "Google DeepMind — Jules GenAI Engineering Lead",
-      img: "./assets/speakers/Shivani-Poddar.jpeg",   // capital S and P
+      img: "./assets/speakers/Shivani-Poddar.jpeg",
       bio: "Engineering Lead addressing coordination across user-facing agents and safety systems at scale. Previously built multi-agent conversational AI at Meta.",
       link: "https://www.linkedin.com/in/shivani-poddar/"
     },
     {
       name: "Prof. Hanan Salam",
       role: "NYU Abu Dhabi — SMART Lab Director",
-      img: "./assets/speakers/Hanan-Salam.jpeg",      // capital H and S
+      img: "./assets/speakers/Hanan-Salam.jpeg",
       bio: "Assistant Professor and SMART Lab Director investigating coordination, trust, and explainability in multi-agent systems. Co-founder of Women in AI and UNESCO AI Ethics Expert.",
       link: "http://www.hanansalam.com/"
     }
   ];
 
+  function loadSpeakerImage(imgEl, basePathOrFull) {
+    const hasExt = /\.[a-z]{3,4}$/i.test(basePathOrFull);
+    const base = hasExt ? basePathOrFull.replace(/\.[^.]+$/, '') : basePathOrFull;
+    const exts = ['.jpg','.jpeg','.png','.JPG','.JPEG','.PNG'];
+    const candidates = hasExt
+      ? [basePathOrFull, ...exts.filter(e => !basePathOrFull.endsWith(e)).map(e => base + e)]
+      : exts.map(e => base + e);
 
-    function loadSpeakerImage(imgEl, basePathOrFull) {
-      const hasExt = /\.[a-z]{3,4}$/i.test(basePathOrFull);
-      const base = hasExt ? basePathOrFull.replace(/\.[^.]+$/, '') : basePathOrFull;
-      const exts = ['.jpg','.jpeg','.png','.JPG','.JPEG','.PNG'];
-      const candidates = hasExt
-        ? [basePathOrFull, ...exts.filter(e => !basePathOrFull.endsWith(e)).map(e => base + e)]
-        : exts.map(e => base + e);
+    let i = 0;
+    const tryNext = () => {
+      if (i >= candidates.length) {
+        imgEl.removeAttribute('srcset');
+        imgEl.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="12" fill="%239ca3af">No image</text></svg>';
+        return;
+      }
+      imgEl.src = candidates[i++];
+      imgEl.onerror = tryNext;
+    };
+    tryNext();
+  }
 
-      let i = 0;
-      const tryNext = () => {
-        if (i >= candidates.length) {
-          imgEl.removeAttribute('srcset');
-          imgEl.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="12" fill="%239ca3af">No image</text></svg>';
-          return;
-        }
-        imgEl.src = candidates[i++];
-        imgEl.onerror = tryNext;
-      };
-      tryNext();
-    }
+  const grid = document.getElementById('speakerGrid');
+  const gridHome = document.getElementById('speakerGridHome');
+  
+  if (grid) grid.innerHTML = '';
+  if (gridHome) gridHome.innerHTML = '';
 
-    const grid = document.getElementById('speakerGrid');
-    grid.innerHTML = '';
-
-    SPEAKERS.forEach(p => {
+  SPEAKERS.forEach(p => {
+    // Create speaker card
+    const createCard = () => {
       const a = document.createElement('a');
       a.href = /^(https?:)?\/{2}/i.test(p.link) ? p.link : `https://${p.link || ''}`;
       a.target = '_blank';
@@ -161,8 +642,14 @@
       a.appendChild(name);
       a.appendChild(role);
       a.appendChild(bio);
-      grid.appendChild(a);
-    });
+      
+      return a;
+    };
+    
+    // Add to both grids
+    if (grid) grid.appendChild(createCard());
+    if (gridHome) gridHome.appendChild(createCard());
+  });
   </script>
 </body>
 </html>
